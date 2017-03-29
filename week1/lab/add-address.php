@@ -14,6 +14,7 @@ and open the template in the editor.
         require_once './models/dbconnect.php';
         require_once './models/addresscrud.php';
         require_once './models/util.php';
+        require_once './models/validation.php';
         $fullname = filter_input(INPUT_POST, 'fullname');
         $email = filter_input(INPUT_POST, 'email');
         $addressline1 = filter_input(INPUT_POST, 'addressline1');
@@ -23,14 +24,43 @@ and open the template in the editor.
         $birthday = filter_input(INPUT_POST, 'birthday');
         
         $errors = [];
+        $states = [];
+        $zipRegex = '/^[0-9]{5}$/';
         if(isPostRequest()){
             if(empty($fullname)){
                 $errors[] = 'Full Name is required.';
             }
-            
-        }
-        include './templates/add-address.html.php';
+            if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
+                $errors[] = 'Email is not valid.';
+            }
         
+            if(empty($addressline1)){
+                $errors[] = 'Address line 1 is required.';
+            }
+            if(empty($city)){
+                $errors[] = 'City is required.';
+            }
+            if(empty($state)){
+                $errors[] = 'State is required.';
+            }
+            if(count($errors) === 0){
+                
+               if(createAddress($fullname, $email, $addressline1, $city, $state, $zip, $birthday))
+               {
+                   $message = 'Address Added';
+                   $fullname = '';
+                   $email = '';
+                   $addressline1 = '';
+                   $city = '';
+                   $state = '';
+                   $zip = '';
+                   $birthday = '';
+               }
+            }
+            }
+        include './templates/add-address.html.php';
+        include './templates/errors.html.php';
+        include './templates/messages.html.php';
         ?>
     </body>
 </html>

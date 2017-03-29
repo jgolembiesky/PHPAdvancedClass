@@ -6,15 +6,10 @@
     </head>
     <body>
         <?php
-        // put your code here
+        include './models/dbconnect.php';
+        include './models/addresscrud.php';
+        $addresses = readAllAddress();
+        include './templates/view-address.html.php';
         ?>
     </body>
 </html>
-<div class="container">
-    <h1>Add Address</h1>
-    <form action="#" method="post">   
-       fullname: <input name="fullname" value="<?php echo $fullname; ?>" /> <br />
-       Phone Type: <input name="phonetype" value="<?php echo $phoneType; ?>" /> <br />
-       <input type="submit" value="submit" class="btn btn-primary" />
-    </form>
-</div>
