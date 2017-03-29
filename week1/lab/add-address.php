@@ -24,8 +24,7 @@ and open the template in the editor.
         $birthday = filter_input(INPUT_POST, 'birthday');
         
         $errors = [];
-        $states = [];
-        $zipRegex = '/^[0-9]{5}$/';
+        $states = getStates();
         if(isPostRequest()){
             if(empty($fullname)){
                 $errors[] = 'Full Name is required.';
@@ -43,6 +42,18 @@ and open the template in the editor.
             if(empty($state)){
                 $errors[] = 'State is required.';
             }
+            if(!isDateValid($birthday))
+            {
+            $errors[] = 'Date is invalid';
+            }
+            if(!isZIPValid($zip))
+            {
+               $errors[] = 'Zip is invalid';
+            }
+                
+            
+            
+            
             if(count($errors) === 0){
                 
                if(createAddress($fullname, $email, $addressline1, $city, $state, $zip, $birthday))
@@ -57,7 +68,7 @@ and open the template in the editor.
                    $birthday = '';
                }
             }
-            }
+        }
         include './templates/add-address.html.php';
         include './templates/errors.html.php';
         include './templates/messages.html.php';

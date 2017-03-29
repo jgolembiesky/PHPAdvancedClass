@@ -39,15 +39,19 @@ function readAllAddress(){
  */
 function createAddress($fullname, $email, $addressline1, $city, $state, $zip, $birthday){
     $db = dbconnect();
-    $stmt = $db->prepare("INSERT INTO address SET fullname = :fullname, email = :email, addressline1 = :addressline1, city = :city, state = :state, zip = :zip, birthday = :birthday")
+    $stmt = $db->prepare("INSERT INTO address SET fullname = :fullname, email = :email, addressline1 = :addressline1, city = :city, state = :state, zip = :zip, birthday = :birthday");
     //prepare statement
     //binds
     //execute binds
-    
-    $stmt = $db->prepare("INSERT INTO phone SET phone = :phone, phonetype = :phonetype, logged = now(), lastupdated = now()");
     $binds = array(
-        ":phone" => $phone,
-        ":phonetype" => $phoneType,
+        ":fullname" => $fullname,
+        ":email" => $email,
+        ":addressline1" => $addressline1,
+        ":city" => $city,
+        ":state" => $state,
+        ":zip" => $zip,
+        ":birthday" => $birthday
+        
     );
     if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
         return true;

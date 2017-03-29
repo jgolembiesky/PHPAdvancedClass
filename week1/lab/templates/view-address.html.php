@@ -9,7 +9,7 @@
     <td><?php echo $row['city']; ?> </td>
     <td><?php echo $row['state']; ?> </td>
     <td><?php echo $row['zip']; ?> </td>
-    <td><?php echo $row['birthday']; ?> </td> 
+    <td><?php echo date("F j, Y",strtotime($row['birthday'])); ?> </td> 
     </tr>
 <?php endforeach; ?>
 </table>

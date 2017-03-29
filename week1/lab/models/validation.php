@@ -12,4 +12,7 @@ function isDateValid($date){
     return (bool)strtotime($date);
 }
 
-function isEmailValid($email){}
+function isEmailValid($email){
+    //TODO: Email Regex
+}
+
