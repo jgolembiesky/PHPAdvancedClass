@@ -8,8 +8,12 @@
     </head>
     <body>
         <?php
-        // put your code here
         session_start();
+         
+        if(isset($_SESSION['user_id']))
+        {
+            unset($_SESSION['user_id']);
+        }
         include './autoload.php';
         include './views/login.html.php';
         $util = new Util();
@@ -30,6 +34,7 @@
             $loginInfo =  $accounts->login($email, $password);
             if ($loginInfo > 0){
                 echo "You logged in!";
+                $loggedIn = 1;
                 $_SESSION['user_id'] = $loginInfo;
                 $util->redirect("admin.php");
         }
