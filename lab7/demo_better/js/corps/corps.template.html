@@ -1,0 +1,28 @@
+<h1>Corporation Table</h1>
+
+<div class="content">
+    
+    <h3>Search</h3>
+    <!-- https://docs.angularjs.org/api/ng/filter/filter -->
+   <input ng-model="searchText"> 
+    <br />
+    <br /> 
+    
+    <table id="searchTextResults" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Corporation Name</th>
+                              
+                <th></th>
+            </tr>
+        </thead>    
+        
+        <tr ng-repeat="corps in vm.corps | filter: searchText">
+            <td>{{corps.corp}}</td>                  
+            <td><a ng-href="#/corps/{{corps.id}}">View</a></td>
+            
+        </tr>
+    </table>
+        
+</div>
+
