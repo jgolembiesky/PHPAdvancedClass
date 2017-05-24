@@ -6,11 +6,13 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/superhero/bootstrap.css">
         <meta charset="UTF-8">
         <title></title>
     </head>
     <body>
         <?php
+        include 'navbar.html';
         require_once './models/dbconnect.php';
         require_once './models/addresscrud.php';
         require_once './models/util.php';
